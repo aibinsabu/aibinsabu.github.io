@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aibin Sabu | Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .text-primary-dark { color: #1E293B; }
+        .bg-primary-dark { background-color: #1E293B; }
+        .text-accent-orange { color: #FB923C; }
+        .bg-accent-orange { background-color: #FB923C; }
+        .text-supporting-gray { color: #64748B; }
+        .typing-effect::after {
+            content: '|';
+            display: inline;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #1E293B; }
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-900">
+
+    <!-- Header / Sticky Navigation -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md transition-all duration-300 shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-primary-dark">Aibin.dev</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-lg font-medium text-supporting-gray hover:text-accent-orange transition-colors">About</a>
+                <a href="#projects" class="text-lg font-medium text-supporting-gray hover:text-accent-orange transition-colors">Projects</a>
+                <a href="#contact" class="text-lg font-medium text-supporting-gray hover:text-accent-orange transition-colors">Contact</a>
+                <a href="#" class="bg-accent-orange text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-500 transition-colors shadow-md">Download Resume</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-primary-dark focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white/95 z-40 md:hidden flex flex-col items-center justify-center space-y-8 transform -translate-x-full transition-transform duration-300">
+        <a href="#about" class="text-3xl font-bold text-primary-dark hover:text-accent-orange transition-colors" onclick="hideMobileMenu()">About</a>
+        <a href="#projects" class="text-3xl font-bold text-primary-dark hover:text-accent-orange transition-colors" onclick="hideMobileMenu()">Projects</a>
+        <a href="#contact" class="text-3xl font-bold text-primary-dark hover:text-accent-orange transition-colors" onclick="hideMobileMenu()">Contact</a>
+        <a href="#" class="bg-accent-orange text-white px-8 py-4 rounded-full font-bold text-xl hover:bg-orange-500 transition-colors shadow-md">Download Resume</a>
+    </div>
+
+    <main class="pt-24">
+        <!-- Home/Hero Section -->
+        <section id="home" class="min-h-[calc(100vh-6rem)] flex items-center justify-center text-center p-6">
+            <div class="max-w-4xl space-y-6">
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-dark leading-tight">
+                    <span id="typing-text" class="typing-effect"></span>
+                    <br>
+                    <span class="text-accent-orange">Full-Stack Developer & Digital Problem Solver.</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-supporting-gray max-w-2xl mx-auto">
+                    Crafting web experiences that actually work. I turn wild ideas into pixel-perfect reality.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                    <a href="#projects" class="bg-accent-orange text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-500 transition-colors shadow-lg">View My Work</a>
+                    <a href="#contact" class="bg-white text-primary-dark px-8 py-4 rounded-full font-bold text-lg border-2 border-primary-dark hover:bg-gray-100 transition-colors shadow-lg">Let's Build Something</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-primary-dark">The Human Behind the Code</h2>
+                    <p class="text-xl text-supporting-gray mt-2">Meet the developer</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center space-y-10 md:space-y-0 md:space-x-12">
+                    <!-- Photo & Bio -->
+                    <div class="md:w-1/2">
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <img src="https://placehold.co/400x400/1E293B/ffffff?text=Your+Photo" alt="Aibin Sabu" class="w-full h-auto rounded-xl shadow-md mb-6">
+                            <p class="text-lg text-supporting-gray leading-relaxed">
+                                Hey there! I'm Aibin – a passionate full-stack developer who loves turning wild ideas into pixel-perfect reality. Currently crushing my BTech (Class of 2022-26), but I've been coding since before it was cool to have "developer" in your bio.
+                                <br><br>
+                                My superpower? Building seamless web experiences that make users go "wow, that just works!" From crafting responsive frontends with React and Vue to architecting robust backends with Python and Django, I speak fluent code in multiple dialects.
+                                <br><br>
+                                When I'm not debugging at 2 AM (okay, maybe I am), you'll find me exploring the latest web technologies, creating digital designs in Illustrator, or helping teams bring their visions to life through clear communication and solid project management.
+                                <br><br>
+                                I believe great software isn't just about clean code – it's about solving real problems for real people. Ready to build something amazing together?
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Skills & Education -->
+                    <div class="md:w-1/2 space-y-10">
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <h3 class="text-2xl font-bold text-primary-dark mb-4">My Technical Toolbox</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">React</span>
+                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">Vue.js</span>
+                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">Python</span>
+                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">Django</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Tailwind CSS</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">JavaScript</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Node.js</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">SQL</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <h3 class="text-2xl font-bold text-primary-dark mb-4">Education</h3>
+                            <div class="space-y-2">
+                                <p class="text-lg font-semibold text-primary-dark">B.Tech in Computer Science</p>
+                                <p class="text-supporting-gray">College of Engineering, Thekkumkara</p>
+                                <p class="text-sm text-supporting-gray">2022 - 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-primary-dark">Things I've Built</h2>
+                    <p class="text-xl text-supporting-gray mt-2">From Concept to Code</p>
+                </div>
+                <!-- Project Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Project Card 1 -->
+                    <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden relative group">
+                        <img src="https://placehold.co/600x400/1E293B/ffffff?text=Project+1" alt="Project 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-primary-dark mb-2">Project 1 Title</h3>
+                            <p class="text-sm text-supporting-gray mb-4">Brief description of the project.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">React</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Node.js</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">MongoDB</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" target="_blank" class="text-accent-orange font-semibold hover:underline">See Live Demo &rarr;</a>
+                                <button onclick="showProjectDetails('Project 1', 'Placeholder for a detailed case study about Project 1. Describe the problem, your role, the technologies used, and the solution.', 'https://github.com/aibinsabu/project1')" class="text-primary-dark text-sm font-semibold hover:text-accent-orange transition-colors">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden relative group">
+                        <img src="https://placehold.co/600x400/1E293B/ffffff?text=Project+2" alt="Project 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-primary-dark mb-2">Project 2 Title</h3>
+                            <p class="text-sm text-supporting-gray mb-4">Brief description of the project.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Vue.js</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Django</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">PostgreSQL</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" target="_blank" class="text-accent-orange font-semibold hover:underline">See Live Demo &rarr;</a>
+                                <button onclick="showProjectDetails('Project 2', 'Placeholder for a detailed case study about Project 2. Describe the problem, your role, the technologies used, and the solution.', 'https://github.com/aibinsabu/project2')" class="text-primary-dark text-sm font-semibold hover:text-accent-orange transition-colors">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden relative group">
+                        <img src="https://placehold.co/600x400/1E293B/ffffff?text=Project+3" alt="Project 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-primary-dark mb-2">Project 3 Title</h3>
+                            <p class="text-sm text-supporting-gray mb-4">Brief description of the project.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">HTML</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">CSS</span>
+                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">JavaScript</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <a href="#" target="_blank" class="text-accent-orange font-semibold hover:underline">See Live Demo &rarr;</a>
+                                <button onclick="showProjectDetails('Project 3', 'Placeholder for a detailed case study about Project 3. Describe the problem, your role, the technologies used, and the solution.', 'https://github.com/aibinsabu/project3')" class="text-primary-dark text-sm font-semibold hover:text-accent-orange transition-colors">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-primary-dark text-white">
+            <div class="container mx-auto px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold mb-4">Let's Create Together</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto">Ready to connect? Drop me a line below or find me on my social channels.</p>
+                <p class="text-md font-semibold text-gray-300 mt-2 mb-6">
+                    Current Availability: <span class="text-green-400">Available for new opportunities</span>
+                </p>
+
+                <!-- Contact Form -->
+                <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg text-left mb-8">
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-primary-dark">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 rounded-lg border-gray-300 shadow-sm focus:border-accent-orange focus:ring-accent-orange text-slate-900" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-primary-dark">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 rounded-lg border-gray-300 shadow-sm focus:border-accent-orange focus:ring-accent-orange text-slate-900" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-primary-dark">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-2 rounded-lg border-gray-300 shadow-sm focus:border-accent-orange focus:ring-accent-orange text-slate-900" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-accent-orange text-white font-bold py-3 rounded-lg hover:bg-orange-500 transition-colors shadow-lg">Send Message</button>
+                    </form>
+                    <div id="form-message" class="mt-4 text-center text-primary-dark font-medium"></div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6">
+                    <a href="https://github.com/aibinsabu" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.605-2.665-.3-5.466-1.333-5.466-5.931 0-1.311.465-2.381 1.236-3.221-.124-.3-1.295-3.04.118-3.18 0 0 1.003-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.296-1.552 3.297-1.23 3.297-1.23 1.42 1.141.252 2.879.122 3.18.771.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.2-6.091 8.2-11.388 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://in.linkedin.com/in/aibin-sabu" target="_blank" class="text-gray-300 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.765s.784-1.765 1.75-1.765 1.75.79 1.75 1.765-.783 1.765-1.75 1.765zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="mailto:aibinsabu05@gmail.com" class="text-gray-300 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-16 4v7a2 2 0 002 2h14a2 2 0 002-2v-7"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-4xl w-full modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modal-title" class="text-3xl font-bold text-primary-dark"></h3>
+                <button onclick="hideProjectDetails()" class="text-gray-500 hover:text-gray-900 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <p id="modal-description" class="text-lg text-supporting-gray leading-relaxed mb-6"></p>
+            <a id="modal-github" href="#" target="_blank" class="bg-primary-dark text-white px-6 py-3 rounded-full font-semibold hover:bg-slate-700 transition-colors shadow-md">View on GitHub &rarr;</a>
+        </div>
+    </div>
+
+    <script>
+        // Typing Effect for Hero Section
+        const typingTextElement = document.getElementById('typing-text');
+        const phrases = ["Hey there! I'm Aibin", "I'm a Full-Stack Developer", "I love building things", "Let's create together"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typingTextElement.textContent = currentPhrase.substring(0, charIndex--);
+            } else {
+                typingTextElement.textContent = currentPhrase.substring(0, charIndex++);
+            }
+
+            if (!isDeleting && charIndex > currentPhrase.length) {
+                setTimeout(() => isDeleting = true, 1500);
+            } else if (isDeleting && charIndex < 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }
+
+            const typingSpeed = isDeleting ? 75 : 150;
+            setTimeout(type, typingSpeed);
+        }
+        window.onload = function() {
+            type();
+        };
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    e.preventDefault();
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formMessage = document.getElementById('form-message');
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            formMessage.classList.add('text-green-600');
+            this.reset();
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+        // Project Modal
+        function showProjectDetails(title, description, githubLink) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-description').textContent = description;
+            document.getElementById('modal-github').href = githubLink;
+            document.getElementById('project-modal').style.display = 'flex';
+        }
+        function hideProjectDetails() {
+            document.getElementById('project-modal').style.display = 'none';
+        }
+
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('-translate-x-full');
+        });
+        function hideMobileMenu() {
+            mobileMenu.classList.add('-translate-x-full');
+        }
+
+    </script>
+</body>
+</html>
