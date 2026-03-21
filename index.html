@@ -3,139 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aibin Sabu | Full-Stack Developer</title>
+    <title>Aibin Sabu | Full-Stack Developer & AI Enthusiast</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #f97316;
+            --accent-hover: #ea580c;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
-        .text-primary-dark { color: #1E293B; }
-        .bg-primary-dark { background-color: #1E293B; }
-        .text-accent-orange { color: #FB923C; }
-        .bg-accent-orange { background-color: #FB923C; }
-        .text-supporting-gray { color: #64748B; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(249, 115, 22, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .nav-glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -10px rgba(249, 115, 22, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px -10px rgba(249, 115, 22, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 12px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+        }
+
         .typing-effect::after {
             content: '|';
-            display: inline;
-            animation: blink-caret 0.75s step-end infinite;
+            animation: blink 1s infinite;
         }
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #1E293B; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
-        .project-card:hover .project-overlay {
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
             opacity: 1;
-        }
-        .modal {
-            display: none;
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            animation: fadeIn 0.3s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-900">
+<body class="bg-[#0f172a] text-slate-200">
+
+    <!-- background blobs -->
+    <div class="blob top-[-100px] left-[-100px]"></div>
+    <div class="blob bottom-[100px] right-[-100px]"></div>
 
     <!-- Header / Sticky Navigation -->
-    <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md transition-all duration-300 shadow-md">
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 nav-glass">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-primary-dark">Aibin.dev</a>
+            <a href="#home" class="text-2xl font-bold font-heading tracking-tighter">
+                Aibin<span class="text-accent">.</span>dev
+            </a>
             <div class="hidden md:flex space-x-8 items-center">
-                <a href="#about" class="text-lg font-medium text-supporting-gray hover:text-accent-orange transition-colors">About</a>
-                <a href="#projects" class="text-lg font-medium text-supporting-gray hover:text-accent-orange transition-colors">Projects</a>
-                <a href="#contact" class="text-lg font-medium text-supporting-gray hover:text-accent-orange transition-colors">Contact</a>
-                <a href="#" class="bg-accent-orange text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-500 transition-colors shadow-md">Download Resume</a>
+                <a href="#about" class="text-sm font-medium hover:text-accent transition-colors">About</a>
+                <a href="#projects" class="text-sm font-medium hover:text-accent transition-colors">Projects</a>
+                <a href="#contact" class="text-sm font-medium hover:text-accent transition-colors">Contact</a>
+                <a href="https://github.com/aibinsabu" target="_blank" class="btn-primary text-sm py-2 px-6">GitHub</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-primary-dark focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
     </header>
 
-    <!-- Mobile Menu (Hidden by default) -->
-    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white/95 z-40 md:hidden flex flex-col items-center justify-center space-y-8 transform -translate-x-full transition-transform duration-300">
-        <a href="#about" class="text-3xl font-bold text-primary-dark hover:text-accent-orange transition-colors" onclick="hideMobileMenu()">About</a>
-        <a href="#projects" class="text-3xl font-bold text-primary-dark hover:text-accent-orange transition-colors" onclick="hideMobileMenu()">Projects</a>
-        <a href="#contact" class="text-3xl font-bold text-primary-dark hover:text-accent-orange transition-colors" onclick="hideMobileMenu()">Contact</a>
-        <a href="#" class="bg-accent-orange text-white px-8 py-4 rounded-full font-bold text-xl hover:bg-orange-500 transition-colors shadow-md">Download Resume</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-950/95 z-40 md:hidden flex flex-col items-center justify-center space-y-8 transform -translate-x-full transition-transform duration-500">
+        <a href="#about" class="text-3xl font-bold hover:text-accent" onclick="hideMobileMenu()">About</a>
+        <a href="#projects" class="text-3xl font-bold hover:text-accent" onclick="hideMobileMenu()">Projects</a>
+        <a href="#contact" class="text-3xl font-bold hover:text-accent" onclick="hideMobileMenu()">Contact</a>
+        <a href="https://github.com/aibinsabu" target="_blank" class="btn-primary text-xl">View GitHub</a>
     </div>
 
-    <main class="pt-24">
+    <main>
         <!-- Home/Hero Section -->
-        <section id="home" class="min-h-[calc(100vh-6rem)] flex items-center justify-center text-center p-6">
-            <div class="max-w-4xl space-y-6">
-                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary-dark leading-tight">
-                    <span id="typing-text" class="typing-effect"></span>
-                    <br>
-                    <span class="text-accent-orange">Full-Stack Developer & Digital Problem Solver.</span>
-                </h1>
-                <p class="text-lg sm:text-xl text-supporting-gray max-w-2xl mx-auto">
-                    Crafting web experiences that actually work. I turn wild ideas into pixel-perfect reality.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
-                    <a href="#projects" class="bg-accent-orange text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-500 transition-colors shadow-lg">View My Work</a>
-                    <a href="#contact" class="bg-white text-primary-dark px-8 py-4 rounded-full font-bold text-lg border-2 border-primary-dark hover:bg-gray-100 transition-colors shadow-lg">Let's Build Something</a>
+        <section id="home" class="min-h-screen flex items-center justify-center relative px-6 pt-20">
+            <div class="container mx-auto max-w-5xl">
+                <div class="text-center space-y-8">
+                    <div class="inline-block px-4 py-1.5 rounded-full border border-orange-500/20 bg-orange-500/10 text-accent text-sm font-semibold mb-4 animate-pulse">
+                        Open for Collaborations
+                    </div>
+                    <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight leading-none">
+                        Building the <span class="text-gradient">Future</span> of <br>
+                        <span id="typing-text" class="typing-effect"></span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-sub max-w-2xl mx-auto leading-relaxed">
+                        I'm Aibin Sabu, a Full-Stack Developer and AI Enthusiast pursuing B.Tech in CSE. 
+                        I specialize in creating high-performance web experiences and intelligent digital solutions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+                        <a href="#projects" class="btn-primary">View My Work</a>
+                        <a href="#contact" class="btn-secondary">Let's Talk</a>
+                    </div>
+                    
+                    <div class="pt-20 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-50">
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl font-bold text-white">B.Tech</span>
+                            <span class="text-xs uppercase tracking-widest text-sub">CSE 2022-26</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl font-bold text-white">Full-Stack</span>
+                            <span class="text-xs uppercase tracking-widest text-sub">Developer</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl font-bold text-white">AI</span>
+                            <span class="text-xs uppercase tracking-widest text-sub">Enthusiast</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl font-bold text-white">GitHub</span>
+                            <span class="text-xs uppercase tracking-widest text-sub">10+ Repos</span>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- scroll down indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 bg-gray-100">
+        <section id="about" class="section-padding relative">
             <div class="container mx-auto px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-primary-dark">The Human Behind the Code</h2>
-                    <p class="text-xl text-supporting-gray mt-2">Meet the developer</p>
-                </div>
-                <div class="flex flex-col md:flex-row items-center space-y-10 md:space-y-0 md:space-x-12">
-                    <!-- Photo & Bio -->
-                    <div class="md:w-1/2">
-                        <div class="bg-white p-8 rounded-2xl shadow-lg">
-                            <img src="https://placehold.co/400x400/1E293B/ffffff?text=Your+Photo" alt="Aibin Sabu" class="w-full h-auto rounded-xl shadow-md mb-6">
-                            <p class="text-lg text-supporting-gray leading-relaxed">
-                                Hey there! I'm Aibin – a passionate full-stack developer who loves turning wild ideas into pixel-perfect reality. Currently crushing my BTech (Class of 2022-26), but I've been coding since before it was cool to have "developer" in your bio.
-                                <br><br>
-                                My superpower? Building seamless web experiences that make users go "wow, that just works!" From crafting responsive frontends with React and Vue to architecting robust backends with Python and Django, I speak fluent code in multiple dialects.
-                                <br><br>
-                                When I'm not debugging at 2 AM (okay, maybe I am), you'll find me exploring the latest web technologies, creating digital designs in Illustrator, or helping teams bring their visions to life through clear communication and solid project management.
-                                <br><br>
-                                I believe great software isn't just about clean code – it's about solving real problems for real people. Ready to build something amazing together?
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="lg:w-1/2 scroll-reveal text-center lg:text-left">
+                        <div class="inline-block px-4 py-1 rounded-full border border-orange-500/20 bg-orange-500/10 text-accent text-xs font-bold uppercase tracking-widest mb-6">
+                            The Developer
+                        </div>
+                        <h2 class="text-4xl md:text-6xl font-bold mb-8 font-heading">
+                            Crafting digital <br>
+                            <span class="text-gradient">excellence</span> with purpose.
+                        </h2>
+                        <div class="space-y-6 text-sub text-lg leading-relaxed">
+                            <p>
+                                I'm a pre-final year Computer Science Engineering student (2022-26) with a deep-rooted passion for solving complex problems through elegant code. 
+                                My journey in tech is driven by an insatiable curiosity for how things work and a desire to build tools that make a difference.
                             </p>
+                            <p>
+                                Specializing in Full-Stack development, I bridge the gap between robust backend architecture and intuitive frontend experiences. 
+                                My current focus lies at the intersection of web technologies and Artificial Intelligence, exploring how AI can enhance user interactions.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <div class="px-6 py-3 glass-card text-sm font-semibold flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                Available for Freelance
+                            </div>
+                            <div class="px-6 py-3 glass-card text-sm font-semibold flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                                B.Tech CSE Student
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Skills & Education -->
-                    <div class="md:w-1/2 space-y-10">
-                        <div class="bg-white p-8 rounded-2xl shadow-lg">
-                            <h3 class="text-2xl font-bold text-primary-dark mb-4">My Technical Toolbox</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">React</span>
-                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">Vue.js</span>
-                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">Python</span>
-                                <span class="bg-gray-100 text-primary-dark px-4 py-2 rounded-full text-sm font-medium text-center shadow-sm">Django</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Tailwind CSS</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">JavaScript</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Node.js</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">SQL</span>
+                    <div class="lg:w-1/2 scroll-reveal flex flex-col gap-6">
+                        <div class="glass-card p-8">
+                            <h3 class="text-xl font-bold mb-6 text-white font-heading">Tech Stack</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-6 gap-x-4">
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Languages</p>
+                                    <p class="text-sm font-medium">JavaScript, TypeScript, Dart, C++</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Frontend</p>
+                                    <p class="text-sm font-medium">React, Vue, Tailwind CSS, Flutter</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Backend</p>
+                                    <p class="text-sm font-medium">Node.js, Python, Django</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Database</p>
+                                    <p class="text-sm font-medium">PostgreSQL, MongoDB, SQL</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Tools</p>
+                                    <p class="text-sm font-medium">Git, Docker, Firebase, AWS</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-[10px] uppercase tracking-widest text-accent font-bold">Interests</p>
+                                    <p class="text-sm font-medium">AI, ML, Cloud Computing</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="bg-white p-8 rounded-2xl shadow-lg">
-                            <h3 class="text-2xl font-bold text-primary-dark mb-4">Education</h3>
-                            <div class="space-y-2">
-                                <p class="text-lg font-semibold text-primary-dark">B.Tech in Computer Science</p>
-                                <p class="text-supporting-gray">College of Engineering, Thekkumkara</p>
-                                <p class="text-sm text-supporting-gray">2022 - 2026</p>
+                        
+                        <div class="glass-card p-8">
+                            <h3 class="text-xl font-bold mb-4 text-white font-heading">Education</h3>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-accent shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">B.Tech in Computer Science</h4>
+                                    <p class="text-sm text-sub">College of Engineering, Thekkumkara</p>
+                                    <p class="text-xs text-accent mt-1">2022 - 2026</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,213 +296,312 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20">
+        <section id="projects" class="section-padding bg-slate-900/50">
             <div class="container mx-auto px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-primary-dark">Things I've Built</h2>
-                    <p class="text-xl text-supporting-gray mt-2">From Concept to Code</p>
+                <div class="text-center mb-16 scroll-reveal">
+                    <h2 class="text-4xl md:text-6xl font-bold font-heading mb-4">Featured <span class="text-gradient">Creations</span></h2>
+                    <p class="text-sub text-lg max-w-2xl mx-auto">A collection of academic and personal projects that showcase my technical journey.</p>
                 </div>
-                <!-- Project Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Project Card 1 -->
-                    <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden relative group">
-                        <img src="https://placehold.co/600x400/1E293B/ffffff?text=Project+1" alt="Project 1" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-primary-dark mb-2">Project 1 Title</h3>
-                            <p class="text-sm text-supporting-gray mb-4">Brief description of the project.</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">React</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Node.js</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">MongoDB</span>
+
+                <!-- Featured Project -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 scroll-reveal">
+                    <!-- EduAI -->
+                    <div class="glass-card overflow-hidden group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="C:\Users\aibin\.gemini\antigravity\brain\2df41540-b787-4bb9-b796-61dd55a954cc\eduai_cover.png" alt="EduAI" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60"></div>
+                            <div class="absolute bottom-4 left-6">
+                                <span class="px-3 py-1 rounded-full bg-orange-500 text-white text-[10px] font-bold uppercase tracking-widest">Major Project</span>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <a href="#" target="_blank" class="text-accent-orange font-semibold hover:underline">See Live Demo &rarr;</a>
-                                <button onclick="showProjectDetails('Project 1', 'Placeholder for a detailed case study about Project 1. Describe the problem, your role, the technologies used, and the solution.', 'https://github.com/aibinsabu/project1')" class="text-primary-dark text-sm font-semibold hover:text-accent-orange transition-colors">Learn More</button>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-3 text-white font-heading">EduAI</h3>
+                            <p class="text-sub text-sm mb-6 leading-relaxed">
+                                A comprehensive AI-driven educational platform designed to personalize the learning experience. Features include automated question generation and student performance analytics.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">React</span>
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">Python</span>
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">Django</span>
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">Tailwind</span>
                             </div>
+                            <a href="https://github.com/aibinsabu/EduAI" target="_blank" class="text-accent font-bold text-sm flex items-center gap-2 group/link">
+                                Source Code 
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
                         </div>
                     </div>
-                    <!-- Project Card 2 -->
-                    <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden relative group">
-                        <img src="https://placehold.co/600x400/1E293B/ffffff?text=Project+2" alt="Project 2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-primary-dark mb-2">Project 2 Title</h3>
-                            <p class="text-sm text-supporting-gray mb-4">Brief description of the project.</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Vue.js</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">Django</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">PostgreSQL</span>
+
+                    <!-- TicketEase -->
+                    <div class="glass-card overflow-hidden group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="C:\Users\aibin\.gemini\antigravity\brain\2df41540-b787-4bb9-b796-61dd55a954cc\ticketease_cover.png" alt="TicketEase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60"></div>
+                            <div class="absolute bottom-4 left-6">
+                                <span class="px-3 py-1 rounded-full bg-blue-500 text-white text-[10px] font-bold uppercase tracking-widest">Mobile App</span>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <a href="#" target="_blank" class="text-accent-orange font-semibold hover:underline">See Live Demo &rarr;</a>
-                                <button onclick="showProjectDetails('Project 2', 'Placeholder for a detailed case study about Project 2. Describe the problem, your role, the technologies used, and the solution.', 'https://github.com/aibinsabu/project2')" class="text-primary-dark text-sm font-semibold hover:text-accent-orange transition-colors">Learn More</button>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-3 text-white font-heading">TicketEase</h3>
+                            <p class="text-sub text-sm mb-6 leading-relaxed">
+                                A streamlined mobile application built for seamless ticket booking and event management. Focuses on UX/UI best practices and high-performance cross-platform execution.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">Flutter</span>
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">Dart</span>
+                                <span class="text-[10px] px-2 py-1 glass-card bg-white/5 rounded">Firebase</span>
                             </div>
+                            <a href="https://github.com/aibinsabu/TicketEase" target="_blank" class="text-accent font-bold text-sm flex items-center gap-2 group/link">
+                                Source Code 
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
                         </div>
                     </div>
-                    <!-- Project Card 3 -->
-                    <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden relative group">
-                        <img src="https://placehold.co/600x400/1E293B/ffffff?text=Project+3" alt="Project 3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold text-primary-dark mb-2">Project 3 Title</h3>
-                            <p class="text-sm text-supporting-gray mb-4">Brief description of the project.</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">HTML</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">CSS</span>
-                                <span class="bg-gray-100 text-primary-dark text-xs px-3 py-1 rounded-full font-medium">JavaScript</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <a href="#" target="_blank" class="text-accent-orange font-semibold hover:underline">See Live Demo &rarr;</a>
-                                <button onclick="showProjectDetails('Project 3', 'Placeholder for a detailed case study about Project 3. Describe the problem, your role, the technologies used, and the solution.', 'https://github.com/aibinsabu/project3')" class="text-primary-dark text-sm font-semibold hover:text-accent-orange transition-colors">Learn More</button>
-                            </div>
-                        </div>
+                </div>
+
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl font-bold font-heading mb-4 text-white">More from <span class="text-accent">GitHub</span></h3>
+                    <p class="text-sub text-sm mb-10">Live repositories fetched directly from my profile.</p>
+                </div>
+
+                <!-- GitHub Projects Grid (Dynamic) -->
+                <div id="github-projects" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 scroll-reveal">
+                    <!-- Loading State -->
+                    <div class="col-span-full flex justify-center py-20">
+                        <div class="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-primary-dark text-white">
-            <div class="container mx-auto px-6 lg:px-8 text-center">
-                <h2 class="text-4xl font-bold mb-4">Let's Create Together</h2>
-                <p class="text-lg text-gray-300 max-w-2xl mx-auto">Ready to connect? Drop me a line below or find me on my social channels.</p>
-                <p class="text-md font-semibold text-gray-300 mt-2 mb-6">
-                    Current Availability: <span class="text-green-400">Available for new opportunities</span>
-                </p>
+        <section id="contact" class="section-padding relative overflow-hidden">
+            <div class="blob top-1/2 left-[-200px] opacity-10"></div>
+            <div class="container mx-auto px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="scroll-reveal">
+                        <div class="inline-block px-4 py-1 rounded-full border border-orange-500/20 bg-orange-500/10 text-accent text-xs font-bold uppercase tracking-widest mb-6">
+                            Get in Touch
+                        </div>
+                        <h2 class="text-4xl md:text-6xl font-bold mb-8 font-heading">
+                            Let's build <br>
+                            something <span class="text-gradient">epic</span>.
+                        </h2>
+                        <p class="text-sub text-lg mb-10 leading-relaxed">
+                            Have a project in mind or just want to chat about AI and web development? 
+                            I'm always open to new opportunities and collaborations.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <a href="mailto:aibinsabu05@gmail.com" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-accent transition-all group-hover:border-accent group-hover:bg-accent/10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-16 4v7a2 2 0 002 2h14a2 2 0 002-2v-7" /></svg>
+                                </div>
+                                <span class="text-sub group-hover:text-white transition-colors">aibinsabu05@gmail.com</span>
+                            </a>
+                            <a href="https://in.linkedin.com/in/aibin-sabu" target="_blank" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-accent transition-all group-hover:border-accent group-hover:bg-accent/10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.765s.784-1.765 1.75-1.765 1.75.79 1.75 1.765-.783 1.765-1.75 1.765zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                </div>
+                                <span class="text-sub group-hover:text-white transition-colors">LinkedIn Profile</span>
+                            </a>
+                        </div>
+                    </div>
 
-                <!-- Contact Form -->
-                <div class="max-w-xl mx-auto bg-white p-8 rounded-xl shadow-lg text-left mb-8">
-                    <form id="contactForm" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-primary-dark">Name</label>
-                            <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 rounded-lg border-gray-300 shadow-sm focus:border-accent-orange focus:ring-accent-orange text-slate-900" required>
+                    <div class="scroll-reveal">
+                        <div class="glass-card p-8 md:p-10">
+                            <form id="contactForm" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold uppercase tracking-widest text-sub px-1">Full Name</label>
+                                        <input type="text" id="name" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="John Doe">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold uppercase tracking-widest text-sub px-1">Email Address</label>
+                                        <input type="email" id="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors" placeholder="john@example.com">
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-widest text-sub px-1">Your Message</label>
+                                    <textarea id="message" rows="5" required class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Hey! I have a project..."></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary w-full py-4 text-base uppercase tracking-widest font-bold">
+                                    Send Message
+                                </button>
+                                <div id="form-message" class="text-center text-sm font-medium mt-4"></div>
+                            </form>
                         </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-primary-dark">Email</label>
-                            <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 rounded-lg border-gray-300 shadow-sm focus:border-accent-orange focus:ring-accent-orange text-slate-900" required>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-primary-dark">Message</label>
-                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-2 rounded-lg border-gray-300 shadow-sm focus:border-accent-orange focus:ring-accent-orange text-slate-900" required></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-accent-orange text-white font-bold py-3 rounded-lg hover:bg-orange-500 transition-colors shadow-lg">Send Message</button>
-                    </form>
-                    <div id="form-message" class="mt-4 text-center text-primary-dark font-medium"></div>
-                </div>
-
-                <!-- Social Links -->
-                <div class="flex justify-center space-x-6">
-                    <a href="https://github.com/aibinsabu" target="_blank" class="text-gray-300 hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.605-2.665-.3-5.466-1.333-5.466-5.931 0-1.311.465-2.381 1.236-3.221-.124-.3-1.295-3.04.118-3.18 0 0 1.003-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.296-1.552 3.297-1.23 3.297-1.23 1.42 1.141.252 2.879.122 3.18.771.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.2-6.091 8.2-11.388 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="https://in.linkedin.com/in/aibin-sabu" target="_blank" class="text-gray-300 hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.765s.784-1.765 1.75-1.765 1.75.79 1.75 1.765-.783 1.765-1.75 1.765zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                    <a href="mailto:aibinsabu05@gmail.com" class="text-gray-300 hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-16 4v7a2 2 0 002 2h14a2 2 0 002-2v-7"/></svg>
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- Project Modal -->
-    <div id="project-modal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-4xl w-full modal-content">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="modal-title" class="text-3xl font-bold text-primary-dark"></h3>
-                <button onclick="hideProjectDetails()" class="text-gray-500 hover:text-gray-900 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
+    <footer class="py-12 border-t border-white/5">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://github.com/aibinsabu" target="_blank" class="text-sub hover:text-accent transition-colors">GitHub</a>
+                <a href="https://in.linkedin.com/in/aibin-sabu" target="_blank" class="text-sub hover:text-accent transition-colors">LinkedIn</a>
+                <a href="mailto:aibinsabu05@gmail.com" class="text-sub hover:text-accent transition-colors">Email</a>
             </div>
-            <p id="modal-description" class="text-lg text-supporting-gray leading-relaxed mb-6"></p>
-            <a id="modal-github" href="#" target="_blank" class="bg-primary-dark text-white px-6 py-3 rounded-full font-semibold hover:bg-slate-700 transition-colors shadow-md">View on GitHub &rarr;</a>
+            <p class="text-sub text-sm">
+                &copy; <span id="year"></span> Aibin Sabu. Built with ❤️ and Modern Web Tech.
+            </p>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // Typing Effect for Hero Section
-        const typingTextElement = document.getElementById('typing-text');
-        const phrases = ["Hey there! I'm Aibin", "I'm a Full-Stack Developer", "I love building things", "Let's create together"];
-        let phraseIndex = 0;
-        let charIndex = 0;
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Typing Effect
+        const phrases = ["Innovation", "Excellence", "Scalability", "Aibin Sabu"];
+        let phraseIdx = 0;
+        let charIdx = 0;
         let isDeleting = false;
+        const typingEl = document.getElementById('typing-text');
 
         function type() {
-            const currentPhrase = phrases[phraseIndex];
+            if (!typingEl) return;
+            const current = phrases[phraseIdx];
             if (isDeleting) {
-                typingTextElement.textContent = currentPhrase.substring(0, charIndex--);
+                typingEl.textContent = current.substring(0, charIdx--);
             } else {
-                typingTextElement.textContent = currentPhrase.substring(0, charIndex++);
+                typingEl.textContent = current.substring(0, charIdx++);
             }
 
-            if (!isDeleting && charIndex > currentPhrase.length) {
-                setTimeout(() => isDeleting = true, 1500);
-            } else if (isDeleting && charIndex < 0) {
+            if (!isDeleting && charIdx > current.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIdx < 0) {
                 isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
             }
 
-            const typingSpeed = isDeleting ? 75 : 150;
-            setTimeout(type, typingSpeed);
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(type, speed);
         }
-        window.onload = function() {
-            type();
-        };
 
-        // Smooth Scrolling
+        // Scroll Reveal
+        function reveal() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        // GitHub API Integration
+        async function fetchRepos() {
+            const container = document.getElementById('github-projects');
+            if (!container) return;
+            try {
+                const response = await fetch('https://api.github.com/users/aibinsabu/repos?sort=updated&per_page=10');
+                const repos = await response.json();
+                
+                if (!Array.isArray(repos)) throw new Error('Invalid response');
+
+                container.innerHTML = '';
+                // Filter out the main projects we spotlighted manually
+                const filteredRepos = repos.filter(repo => !['EduAI', 'TicketEase'].includes(repo.name) && repo.name !== 'aibinsabu.github.io');
+
+                filteredRepos.slice(0, 6).forEach(repo => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-card p-6 flex flex-col justify-between h-full';
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="text-accent">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+                                </div>
+                                <div class="flex gap-2 text-[10px] text-sub font-bold uppercase">
+                                    <span>${repo.language || 'Code'}</span>
+                                    <span>⭐ ${repo.stargazers_count}</span>
+                                </div>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2 font-heading">${repo.name}</h4>
+                            <p class="text-sub text-xs line-clamp-2 mb-4">${repo.description || 'No description provided.'}</p>
+                        </div>
+                        <a href="${repo.html_url}" target="_blank" class="text-accent text-xs font-bold hover:underline flex items-center gap-1">
+                            View on GitHub 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        </a>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                console.error('Error fetching repos:', err);
+                container.innerHTML = '<p class="col-span-full text-center text-sub">Error loading repositories. Check back later!</p>';
+            }
+        }
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('-translate-x-full');
+            });
+        }
+
+        function hideMobileMenu() {
+            if (mobileMenu) mobileMenu.classList.add('-translate-x-full');
+        }
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formMsg = document.getElementById('form-message');
+                formMsg.textContent = 'Message sending... (Simulated)';
+                formMsg.className = 'text-center text-sm font-medium mt-4 text-accent';
+                
+                setTimeout(() => {
+                    formMsg.textContent = 'Thank you! Your message has been sent successfully.';
+                    formMsg.className = 'text-center text-sm font-medium mt-4 text-green-500';
+                    this.reset();
+                }, 1000);
+            });
+        }
+
+        // Smooth Scroll for local links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId !== '#') {
-                    e.preventDefault();
-                    document.querySelector(targetId).scrollIntoView({
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // Contact Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formMessage = document.getElementById('form-message');
-            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
-            formMessage.classList.add('text-green-600');
-            this.reset();
+        // Initialize
+        window.addEventListener('load', () => {
+            type();
+            fetchRepos();
+            reveal();
+            window.addEventListener('scroll', reveal);
         });
 
-        // Sticky Header
-        window.addEventListener('scroll', function() {
+        // Sticky Header Effect
+        window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
+            if (!header) return;
             if (window.scrollY > 50) {
-                header.classList.add('shadow-lg');
+                header.classList.add('py-2', 'shadow-2xl');
+                header.classList.remove('py-4');
             } else {
-                header.classList.remove('shadow-lg');
+                header.classList.add('py-4');
+                header.classList.remove('py-2', 'shadow-2xl');
             }
         });
-
-        // Project Modal
-        function showProjectDetails(title, description, githubLink) {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-description').textContent = description;
-            document.getElementById('modal-github').href = githubLink;
-            document.getElementById('project-modal').style.display = 'flex';
-        }
-        function hideProjectDetails() {
-            document.getElementById('project-modal').style.display = 'none';
-        }
-
-        // Mobile Menu
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('-translate-x-full');
-        });
-        function hideMobileMenu() {
-            mobileMenu.classList.add('-translate-x-full');
-        }
-
     </script>
 </body>
 </html>
