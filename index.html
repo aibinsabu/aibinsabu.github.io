@@ -411,6 +411,12 @@
                     <div class="scroll-reveal">
                         <div class="glass-card p-8 md:p-10">
                             <form id="contactForm" class="space-y-6" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeacvetlM9AQwWaPgIjEVIKbgaE_O2K9MVE-IBOf_ndeMuqTg/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+                                <!-- Google Form Hidden Fields -->
+                                <input type="hidden" name="fvv" value="1">
+                                <input type="hidden" name="fbzx" value="1469841364814726057">
+                                <input type="hidden" name="pageHistory" value="0">
+                                <input type="hidden" name="partialResponse" value='[null,null,"1469841364814726057"]'>
+                                <input type="hidden" name="submissionTimestamp" value="-1">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="space-y-2">
                                         <label class="text-xs font-bold uppercase tracking-widest text-sub px-1">Full Name</label>
@@ -558,18 +564,23 @@
         const contactForm = document.getElementById('contactForm');
         
         function handleFormResponse() {
-            const formMsg = document.getElementById('form-message');
-            formMsg.textContent = 'Thank you! Your message has been sent successfully.';
-            formMsg.className = 'text-center text-sm font-medium mt-4 text-green-500';
-            if (contactForm) contactForm.reset();
-            submitted = false;
+            if (submitted) {
+                const formMsg = document.getElementById('form-message');
+                formMsg.innerHTML = '<div class="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-500 flex items-center justify-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg> Thank you! Your message has been sent successfully.</div>';
+                if (contactForm) contactForm.reset();
+                submitted = false;
+                
+                // Clear message after 5 seconds
+                setTimeout(() => {
+                    formMsg.innerHTML = '';
+                }, 5000);
+            }
         }
 
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
                 const formMsg = document.getElementById('form-message');
-                formMsg.textContent = 'Message sending...';
-                formMsg.className = 'text-center text-sm font-medium mt-4 text-accent';
+                formMsg.innerHTML = '<div class="flex items-center justify-center gap-2 text-accent"><div class="w-4 h-4 border-2 border-accent border-t-transparent rounded-full animate-spin"></div> Sending message...</div>';
             });
         }
 
